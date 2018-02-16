@@ -2,17 +2,19 @@
  * This function returns an array of counters. Any element
  * you want to be saved into the store.
  */
-export const getCounters = () => {
-  return [
-    {
-      _id: 'test1',
-      count: 2
-    },
-    {
-      _id: 'test2',
-      count: 7
-    }
-  ]
+export const getCounters = (state = null, action) => {
+  console.log('CountersReducer_getCounters', action);
+  switch (action.type) {
+    case 'COUNTER_LOADED':
+      console.log('COUNTER_LOADED', action.payload);
+      return action.payload;
+      break;
+    case 'COUNTER_LOADED_FULFILLED':
+      console.log('COUNTER_LOADED_FULFILLED', action.payload);
+      return action.payload;
+      break;
+  }
+  return state;
 };
 
 // This function lists for the ACTION. Whenever, any action gets

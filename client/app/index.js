@@ -10,9 +10,12 @@ import {
 } from 'react-router-dom';
 
 // Redux related
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import allReducers from './reducers';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import promise from 'redux-promise-middleware';
 
 // Containers
 import App from './containers/App/App';
@@ -26,7 +29,8 @@ import './styles/styles.scss';
 
 // Redux
 // Store is all this application data.
-const store = createStore(allReducers);
+const logger = createLogger({});
+const store = createStore(allReducers, {}, applyMiddleware(logger, thunk, promise()));
 // Reducer is a function that tells what data to store in store.
 //         They take an action adn update part of the application
 //         state. Reducers are broken down by parts.

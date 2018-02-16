@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Redux Actions
-import { selectCounter } from '../../actions/CounterActions';
+import { selectCounter, getCounters } from '../../actions/CounterActions';
 // Technically, you can just add selectCounter to the onClick
 // action of the list of counters. However, it's not using
 // Redux in that case. To do it, properly you need to use
@@ -62,11 +62,18 @@ function mapStateToProps(state) {
 
 // Passing the selectCounter action in as a prop.
 // Dispatch is a way saying call a function.
-function matchDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   // Connect this function creator to prop.
-  return bindActionCreators({
-    selectCounter: selectCounter,
-  }, dispatch);
+  // return bindActionCreators({
+  //   selectCounter: selectCounter,
+  //   getCounters: getCounters,
+  // }, dispatch);
+  return {
+    selectCounter: (counter) => {
+      dispatch(selectCounter(counter));
+    },
+    getCounters: dispatch(getCounters())
+  };
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(Counters);
+export default connect(mapStateToProps, mapDispatchToProps)(Counters);
