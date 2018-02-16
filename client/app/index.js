@@ -11,7 +11,8 @@ import {
 
 // Redux related
 import { createStore } from 'redux';
-import allReducers from './reducers'
+import allReducers from './reducers';
+import { Provider } from 'react-redux';
 
 // Containers
 import App from './containers/App/App';
@@ -28,16 +29,20 @@ const store = createStore(allReducers);
 // Reducer is a function that tells what data to store in store.
 //         They take an action adn update part of the application
 //         state. Reducers are broken down by parts.
-
+// Provider makes your store/data available to the containers.
 
 render((
-  <Router>
-    <App>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/helloworld" component={HelloWorld}/>
-        <Route component={NotFound}/>
-      </Switch>
-    </App>
-  </Router>
+  <Provider
+    store={store}
+  >
+    <Router>
+      <App>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/helloworld" component={HelloWorld}/>
+          <Route component={NotFound}/>
+        </Switch>
+      </App>
+    </Router>
+  </Provider>
 ), document.getElementById('app'));
