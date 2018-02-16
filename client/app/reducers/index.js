@@ -11,3 +11,5 @@ import CountersReducer from './CountersReducer';
 const allReducers = combineReducers({
   counters: CountersReducer,
 });
+
+export default allReducers;
