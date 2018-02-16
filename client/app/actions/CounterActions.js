@@ -12,23 +12,14 @@ export function selectCounter(counter) {
 };
 
 export function getCounters() {
-  console.log('CounterActions_getCounters');
-  // return dispatch => {
-  //   axios.get('/api/counters').then((response) => {
-  //     console.log('response', response);
-  //
-  //     dispatch({
-  //       type: 'COUNTER_LOADED',
-  //       payload: response
-  //     });
-  //   });
-  //
-  // }
   return {
     type: 'COUNTER_LOADED',
     payload: new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve([ { _id: 'test', count: 1 } ]);
+        axios.get('/api/counters').then(response => {
+          const { data } = response;
+          resolve(data);
+        });
       }, 2000);
     })
   };
