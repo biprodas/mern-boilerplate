@@ -3,7 +3,6 @@
 // of the action and the return attribute is
 // the actual action.
 export const selectCounter = (counter) => {
-  console.log('Click', counter);
   return {
     // type of action occurred
     type: "COUNTER_SELECT",

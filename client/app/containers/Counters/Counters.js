@@ -15,10 +15,6 @@ class Counters extends Component {
 
   }
 
-  onCounterClicked() {
-
-  }
-
   render() {
     return (
       <div>
@@ -37,6 +33,16 @@ class Counters extends Component {
             })
           ) : (null)
         }
+        {
+          (this.props.selectedCounter) ? (
+            <div>
+              <p>
+                Current Count for {this.props.selectedCounter._id}
+                 is {this.props.selectedCounter.count}.
+              </p>
+            </div>
+          ) : (null)
+        }
       </div>
     );
   }
@@ -49,7 +55,8 @@ class Counters extends Component {
 // store.
 function mapStateToProps(state) {
   return {
-    counters: state.counters
+    counters: state.counters,
+    selectedCounter: state.selectedCounter,
   };
 };
 
